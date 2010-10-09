@@ -8,5 +8,5 @@ var activity = require('activity');
 
 db.fetchCompany('techcrunch', function(company) {
   activity.synthesize(company);
-  //sys.puts(sys.inspect(company.activity))
+  sys.puts(sys.inspect(company.activity))
 });

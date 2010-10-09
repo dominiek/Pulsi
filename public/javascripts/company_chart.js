@@ -1,4 +1,11 @@
-function graphCompany(){
+function graphCompany(company){
+  var data = [];
+  var numActivities = 40;
+  var relevantActivity = company.activity.slice(0-numActivities);
+  for(var i=0; relevantActivity.length>i; i++) {
+    data.push(relevantActivity[i].value);
+  }
+  
 	companyChart = new Highcharts.Chart({
 		chart: {
 			renderTo: 'company_chart',
@@ -14,7 +21,7 @@ function graphCompany(){
 			title: {
 				text: ''
 			},
-			//min: 0.6,
+			min: 2280,
 			startOnTick: false,
 			showFirstLabel: false
 		},
@@ -58,9 +65,7 @@ function graphCompany(){
 			type: 'area',
 			pointInterval: 1,
 			pointStart: 0,
-			data: [
-				12, 34, 500, 1000, 123, 242, 300
-			]
+			data: data
 		}]
 	});
 }

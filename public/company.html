@@ -19,7 +19,9 @@
 					this.get('#/:name', function() {
 						companyName = this.params['name'];
 						showCompanyDetails();
-						graphCompany();
+						companies.info(companyName, function(company) {
+  						graphCompany(company);
+						});
 					});
 				});
 				sammy.run();
