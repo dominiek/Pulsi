@@ -1,0 +1,25 @@
+body, html {
+	font-family: helvetica, arial;
+	background-color: #535555;
+	height: 100%;
+	
+}
+
+#root {
+	width: 800px;
+	height: 100%;
+	margin: 0 auto;
+	background-color: #bbb7a6;
+}
+
+#head {
+	padding: 20px;
+	background-color: #c23d7f;
+}
+
+#logo {
+	font-size: 42px;
+	color: #4da5d6;
+	font-weight: bold;
+	text-transform: uppercase;
+}
