@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pulsi</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="javascripts/sammy-0.6.1.min.js"></script>
+		<script type="text/javascript" src="javascripts/companies.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
+		<link rel="stylesheet" type="text/css" href="css/common.css">
+		<script type="text/javascript">
+		    $(document).ready(function(){
+				var baseUrl = 'http://api.crunchbase.com/';
+			
+				companies.crunchbaseInfo('mashable', function(companyInfo) {
+					$('#company_name').html(companyInfo.name);
+					$('#company_description').html(companyInfo.overview);
+					$('#company_logo').get(0).src = baseUrl+companyInfo.image.available_sizes[0][1];
+				});
+				companies.info('facebook', function(companyInfo) {
+					$('#company_value').html(companyInfo.current_value);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="root">
+			<div id="head">
+				<div id="logo">Pul&#36;i</div>
+			</div>
+			<div id="content" class="clearfix">
+				<div id="info">
+					<h1 id="company_name"></h1>
+					<img src="" id="company_logo" alt="logo" />
+					<p><strong>Value:</strong> <span id="company_value"></span></p>
+					<p><strong>Description:</strong> <span id="company_description"></span></p>
+				</div>	
+			</div>
+		</div>
+	</body>
+</html>
