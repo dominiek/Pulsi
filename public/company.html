@@ -21,10 +21,15 @@
 			});
 			
 			function showCompanyDetails(){
+				$('#info').html('');
 				companies.crunchbaseInfo(companyName, function(companyInfo) {
-					$('#company_name').html(companyInfo.name);
-					$('#company_description').html(companyInfo.overview);
-					$('#company_logo').get(0).src = baseUrl+companyInfo.image.available_sizes[0][1];
+					$('<h1 id="company_name">'+companyInfo.name+'</h1>').appendTo('#info');
+					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+baseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="logo" /></a>').appendTo('#info');
+					$('<p><strong>Value:</strong> <span id="company_value"></span></p>').appendTo('#info');
+					if(companyInfo.twitter_username){
+						$('<p><strong>Twitter:</strong> <a href="http://twitter.com/#!/'+companyInfo.twitter_username+'" id="company_twitter" target="_blank">'+companyInfo.twitter_username+'</a></p>').appendTo('#info');
+					}
+					$('<p><strong>Description:</strong> <span id="company_description">'+companyInfo.overview+'</span></p>').appendTo('#info');					
 				});
 				companies.info(companyName, function(companyInfo) {
 					$('#company_value').html(companyInfo.current_value);
@@ -40,12 +45,7 @@
 				<div id="logo">Pul&#36;i</div>
 			</div>
 			<div id="content" class="clearfix">
-				<div id="info">
-					<h1 id="company_name"></h1>
-					<img src="" id="company_logo" alt="logo" />
-					<p><strong>Value:</strong> <span id="company_value"></span></p>
-					<p><strong>Description:</strong> <span id="company_description"></span></p>
-				</div>	
+				<div id="info"></div>	
 			</div>
 		</div>
 	</body>
