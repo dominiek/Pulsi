@@ -9,9 +9,13 @@ body, html {
 	width: 800px;
 	height: 100%;
 	margin: 0 auto;
-	background-color: #bbb7a6;
+	background-color: #fff;
 }
 
+/* typography */
+strong {font-weight: bold;}
+
+/* head */
 #head {
 	padding: 20px;
 	background-color: #c23d7f;
@@ -22,4 +26,14 @@ body, html {
 	color: #4da5d6;
 	font-weight: bold;
 	text-transform: uppercase;
+}
+
+
+/* content */
+#content {
+	padding: 20px;
+}
+
+#content p, #content img {
+	margin-bottom: 20px;
 }
