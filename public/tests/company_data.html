@@ -10,6 +10,13 @@
     <script type="text/javascript">
 	    $(document).ready(function(){
 
+        asyncTest("companies.browse", function() {
+          companies.browse(function(companies) {
+            equal(12, companies.length, "should get 12 companies")
+            start();
+          });
+        });
+
         asyncTest("companies.info", function() {
           companies.info('facebook', function(companyInfo) {
             equal('Facebook', companyInfo.name, "should have a name set")

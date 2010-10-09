@@ -4,20 +4,9 @@ var Companies = function() {
 };
 
 Companies.prototype.browse = function(callback) {
-  callback([
-    {name: "Dropbox", identifier: "dropbox"},
-    {name: "Facebook", identifier: "facebook"},
-    {name: "Twitter", identifier: "twitter"},
-    {name: "Techcrunch", identifier: "techcrunch"},
-    {name: "Mashable", identifier: "mashable"},
-    {name: "Evernote", identifier: "evernote"},
-    {name: "Github", identifier: "github"},
-    {name: "Last.fm", identifier: "last-fm"},
-    {name: "LinkedIn", identifier: "linkedin"},
-    {name: "Youtube", identifier: "youtube"},
-    {name: "37Signals", identifier: "37signals"},
-    {name: "Skype", identifier: "skype"},
-  ]);
+  $.get('/companies.json', function(response) {
+    callback(response.companies);
+  }, 'json');
 };
 
 Companies.prototype.info = function(identfier, callback) {
