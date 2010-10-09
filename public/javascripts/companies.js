@@ -1,9 +1,9 @@
 
-var Company = function() {
+var Companies = function() {
   
 };
 
-Company.prototype.browse = function(callback) {
+Companies.prototype.browse = function(callback) {
   callback([
     {name: "Dropbox", identifier: "dropbox"},
     {name: "Facebook", identifier: "facebook"},
@@ -20,7 +20,7 @@ Company.prototype.browse = function(callback) {
   ]);
 };
 
-Company.prototype.info = function(identfier, callback) {
+Companies.prototype.info = function(identfier, callback) {
   callback({
     identfier: 'facebook',
     name: 'Facebook',
@@ -44,7 +44,7 @@ Company.prototype.info = function(identfier, callback) {
 };
 
 
-Company.prototype.activity = function(identfier, callback) {
+Companies.prototype.activity = function(identfier, callback) {
   callback([
     {type: 'buy', user: {}, when: Date.now(), num_shares: 3},
     {type: 'sell', user: {}, when: Date.now(), num_shares: 2},
@@ -52,8 +52,8 @@ Company.prototype.activity = function(identfier, callback) {
   ]);
 };
 
-Company.prototype.crunchbaseInfo = function(identfier, callback) {
+Companies.prototype.crunchbaseInfo = function(identfier, callback) {
   //See: http://api.crunchbase.com/v/1/company/facebook.js
 };
 
-var company = new Company();
+var companies = new Companies();
