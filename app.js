@@ -1,8 +1,12 @@
 
+require.paths.unshift(__dirname + '/lib')
 sys = require('sys')
 var express = require('express'),
     connect = require('connect'),
     auth    = require('connect-auth');
+var db = require('db');
+var activity = require('activity');
+    
     
 var MemoryStore = require('connect/middleware/session/memory');
 
@@ -43,4 +47,12 @@ app.get('/companies.json', function(req, res){
   respondWithCallback(req, res, {companies: companies});
 });
 
+app.get('/companies/:identifier.json', function(req, res) {
+  db.fetchCompany(req.param('identifier'), function(company) {
+    activity.synthesize(company);
+    return respondWithCallback(req, res, {company: company});
+  });
+});
+
+sys.puts("Running on http://localhost:6008/");
 app.listen(6008);

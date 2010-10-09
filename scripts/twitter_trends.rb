@@ -33,7 +33,7 @@ end
 results = []
 csv.each do |line|
   line = line.split(',')
-  time = line[0]
+  time = line[0].gsub(/-\d\d\d\d$/, '')
   num_tweets = line.last
   results << {:time => time, :num_tweets => num_tweets}
 end
