@@ -1,10 +1,26 @@
 <html>
   <head>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript" src="/javascripts/companies.js"></script>
+    <script type="text/javascript" src="../javascripts/companies.js"></script>
+    <script type="text/javascript" src="../javascripts/qunit.js"></script>
+		<link type="text/css" rel="stylesheet" href="../stylesheets/qunit.css" />
   </head>
   
   <body>
-    
+    <script type="text/javascript">
+	    $(document).ready(function(){
+
+        asyncTest("companies.info", function() {
+          companies.info('facebook', function(companyInfo) {
+            equal('Facebook', companyInfo.name, "should have a name set")
+            start();
+          });
+        });
+      });
+		</script>
+    <h1 id="qunit-header">Company Data Test</h1>
+    <h2 id="qunit-banner"></h2>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
   </body>
 </html>
