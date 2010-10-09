@@ -16,6 +16,13 @@
             start();
           });
         });
+        
+        asyncTest("companies.crunchbaseInfo", function() {
+          companies.crunchbaseInfo('last-fm', function(companyInfo) {
+            equal('http://blog.last.fm/', companyInfo.blog_url, "should have a blog_url set")
+            start();
+          });
+        });
       });
 		</script>
     <h1 id="qunit-header">Company Data Test</h1>

@@ -12,7 +12,7 @@ Companies.prototype.browse = function(callback) {
     {name: "Mashable", identifier: "mashable"},
     {name: "Evernote", identifier: "evernote"},
     {name: "Github", identifier: "github"},
-    {name: "Last.fm", identifier: "lastfm"},
+    {name: "Last.fm", identifier: "last-fm"},
     {name: "LinkedIn", identifier: "linkedin"},
     {name: "Youtube", identifier: "youtube"},
     {name: "37Signals", identifier: "37signals"},
@@ -53,7 +53,9 @@ Companies.prototype.activity = function(identfier, callback) {
 };
 
 Companies.prototype.crunchbaseInfo = function(identfier, callback) {
-  //See: http://api.crunchbase.com/v/1/company/facebook.js
+  $.getJSON('http://api.crunchbase.com/v/1/company/'+identfier+'.js?callback=?', function(response) {
+    callback(response);
+  });
 };
 
 var companies = new Companies();
