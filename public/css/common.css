@@ -1,19 +1,43 @@
 body, html {
 	font-family: helvetica, arial;
 	background-color: #535555;
-	height: 100%;
-	
 }
 
 #root {
 	width: 800px;
-	height: 100%;
 	margin: 0 auto;
 	background-color: #fff;
 }
 
+/* utility */
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}
+
 /* typography */
 strong {font-weight: bold;}
+
+h1 {
+	font-size: 22px;
+	margin-bottom: 20px;
+}
 
 /* head */
 #head {

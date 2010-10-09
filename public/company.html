@@ -8,18 +8,32 @@
 		<script type="text/javascript" src="javascripts/companies.js"></script>
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
 		<link rel="stylesheet" type="text/css" href="css/common.css">
+		<script type="text/javascript">
+		    $(document).ready(function(){
+				var baseUrl = 'http://api.crunchbase.com/';
+			
+				companies.crunchbaseInfo('mashable', function(companyInfo) {
+					$('#company_name').html(companyInfo.name);
+					$('#company_description').html(companyInfo.overview);
+					$('#company_logo').get(0).src = baseUrl+companyInfo.image.available_sizes[0][1];
+				});
+				companies.info('facebook', function(companyInfo) {
+					$('#company_value').html(companyInfo.current_value);
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div id="root">
 			<div id="head">
 				<div id="logo">Pul&#36;i</div>
 			</div>
-			<div id="content">
+			<div id="content" class="clearfix">
 				<div id="info">
-					<p>Name</p>
-					<img src="http://api.crunchbase.com/assets/images/resized/0000/2848/2848v3-max-150x150.jpg" alt="logo" />
-					<p><strong>Value:</strong> 244</p>
-					<p><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<h1 id="company_name"></h1>
+					<img src="" id="company_logo" alt="logo" />
+					<p><strong>Value:</strong> <span id="company_value"></span></p>
+					<p><strong>Description:</strong> <span id="company_description"></span></p>
 				</div>	
 			</div>
 		</div>
