@@ -54,5 +54,33 @@ app.get('/companies/:identifier.json', function(req, res) {
   });
 });
 
+app.post('/signin', function(req, res) {
+  if(!req.param('username')) {
+    return respondWithCallback(req, res, {error: "Need :username"}); 
+  }
+  db.load(function(storage) {
+    var user = storage.users[req.param('username')];
+    if(user) {
+      return respondWithCallback(req, res, {user: user}); 
+    } else {
+      user = db.newUser();
+      storage.users[req.param('username')] = user;
+      db.store(function() {
+        respondWithCallback(req, res, {user: user}); 
+      });
+    }
+  });
+});
+
+app.post('/buy', function(req, res) {
+  if(!req.param('company_identifier')) {
+    return respondWithCallback(req, res, {error: "Need :company_identifier"}); 
+  }
+
+  if(!req.param('num_shares')) {
+    return respondWithCallback(req, res, {error: "Need :num_shares"}); 
+  }
+});
+
 sys.puts("Running on http://localhost:6008/");
 app.listen(6008);
