@@ -4,16 +4,15 @@
 		<title>Pulsi</title>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="javascripts/users.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				if (window.webkitNotifications.checkPermission() != 0) {
-					$('<a href="#" onclick="setupNotification(); return false;">Allow notifications</a>').appendTo('#content');
+				if(localStorage.getItem('username')){
+					location.href = 'dashboard.html';
 				}
 			});
 			
-			function setupNotification(){
-				window.webkitNotifications.requestPermission();
-			}
 		</script>
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
 		<link rel="stylesheet" type="text/css" href="css/common.css">
@@ -21,12 +20,13 @@
 	<body>
 		<div id="root">
 			<div id="head">
+				<p id="userinfo"></p>
 				<div id="logo">Pul&#36;i</div>
 			</div>
 			<div id="content" class="clearfix">
 				<h1>Login</h1>
-				<form action="xxx" method="get">
-					<input type="text" value="username" />
+				<form action="dashboard.html" onsubmit="userLogin(); return false;" method="get">
+					<input type="text" value="username" title="username" id="username" class="clearable" />
 					<input type="submit" value="go" />
 				</form>
 			</div>
