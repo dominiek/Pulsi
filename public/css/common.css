@@ -88,3 +88,7 @@ h1, h2 {
 	height: 100px; 
 	margin: 0 15px;
 }
+
+button {
+  padding: 4px;
+}
