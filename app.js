@@ -96,11 +96,17 @@ app.get('/buy.json', function(req, res) {
         return respondWithCallback(req, res, {error: "Not enough balance! Sorry!"});
       }
       
+      var activityObject = {what: "dilution", when: new Date()};
+      activityObject.timestamp = activityObject.when-0;
+      activityObject.raw_value = num_shares;
+      activityObject.value = company.current_value;
+      activity.augmentValueByEvent(company, activityObject);
+      
       var activeUsernames = Object.keys(ACTIVE_CLIENTS);
       for(var k=0; activeUsernames.length>k; k++) {
         var client = ACTIVE_CLIENTS[activeUsernames[k]];
         if(client.company_identifier && client.company_identifier == req.param('company_identifier')) {
-          client.send(JSON.stringify({action: 'activity', 'activityObject': {value: company.current_value}}));
+          client.send(JSON.stringify({action: 'activity', 'activityObject': activityObject}));
         }
       }
       
