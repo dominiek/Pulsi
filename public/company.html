@@ -28,14 +28,22 @@
 						companyIdentifier = this.params['identifier'];
 						longCompanyDetails();
 						companies.info(companyIdentifier, function(company) {
-  						graphCompany(company);
-  						users.current(function(user) {
-  						  companies.subscribe(user.username, companyIdentifier, function(response) {
-  						    company.current_value = response.activityObject.value;
-    							showChromeNotification(company.name, 'Share price is now: '+'$'+roundSharePrice(company.current_value));
-  						   	updateChart(company.current_value);
-  						   	$('#company_value').html('$'+roundSharePrice(company.current_value));
-  					    });
+	  						graphCompany(company);
+	  						users.current(function(user) {
+								var investments = user.investments;
+								var companyIdentifiers = _.keys(investments);
+								for(var k=0; companyIdentifiers.length>k; k++) {
+								  	var investment = investments[companyIdentifiers[k]];
+									if(companyIdentifier == investment.identifier){
+										$('#company_stock_count').html(investment.num_shares);
+									}
+								}
+	  						  	companies.subscribe(user.username, companyIdentifier, function(response) {
+	  						    	company.current_value = response.activityObject.value;
+		    						showChromeNotification(company.name, 'Share price is now: '+'$'+roundSharePrice(company.current_value));
+		  						   	updateChart(company.current_value);
+		  						   	$('#company_value').html('$'+roundSharePrice(company.current_value));
+		  					    });
   						});
 					});
 					$('#investing form').submit(function() {
@@ -102,6 +110,7 @@
 				</div>
 				<div id="investing">
 					<h2>My Investment</h2>
+					<p>You own <strong id="company_stock_count">0</strong> shares</p>
 					<form>
 						<input type="text" class="buy_input text clearable" name="num_shares" size="3" value="200" title="200" />
 						<button class="buy_button"></button>
