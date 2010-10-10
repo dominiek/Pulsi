@@ -54,7 +54,6 @@
 				companies.crunchbaseInfo(companyIdentifier, function(companyInfo) {
 					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+crunchbaseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="'+companyInfo.name+'" /></a>').appendTo('#info');
 					if(stockValue){
-						console.log(companyInfo.name);
 						if(companyInfo.name == '<Undefined>'){
 							var theCompanyName = '&lt;Undefined&gt;';
 						}else{

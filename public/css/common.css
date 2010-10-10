@@ -81,7 +81,9 @@ button {
 	padding: 19px 0 0; 
 	overflow: hidden;
 	position: relative;
-	background-image: url(/images/logout.png)
+	background-image: url(/images/logout.png);
+	float: right;
+	clear: none;
 }
 
 .dashboard_link {
@@ -106,6 +108,21 @@ button {
 	color: #fff;
 }
 
+#userinfo .welcome {
+	padding-top: 3px;
+	float: right; 
+}
+
+#userinfo .welcome span {
+	color: #fff;
+}
+
+#userinfo .allow_link {
+	float: right;
+	padding-top: 3px;
+	margin-right: 10px;
+	color: #2c5a06;
+}
 
 /* content */
 #content {
