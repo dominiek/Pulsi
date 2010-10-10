@@ -58,7 +58,7 @@ h1, h2 {
 	padding: 20px;
 }
 
-#content p, #content img {
+#content p, #content img, #content form {
 	margin-bottom: 20px;
 }
 
