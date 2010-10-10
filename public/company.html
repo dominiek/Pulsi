@@ -28,7 +28,7 @@
   						users.current(function(user) {
   						  companies.subscribe(user.username, companyIdentifier, function(response) {
   						    company.current_value = response.activityObject.value;
-    							showChromeNotification(company.name, 'Share price is now: '+company.current_value+'$');
+    							showChromeNotification(company.name, 'Share price is now: '+'$'+company.current_value);
   						   		updateChart(company.current_value);
   					    	});
   						});
@@ -36,12 +36,10 @@
 					$('#investing form').submit(function() {
 						  users.buy(companyIdentifier, parseInt($('#investing input.text').val()), function() {
 						    $('#investing input.text').val('');
-                document.location.reload();
+                				document.location.reload();
 						  });
 						  return false;
 						});
-    			  $('#investing input.text').focus();
-						
 					});
 				});
 				sammy.run();
@@ -54,16 +52,23 @@
 					stockValue = companyInfo.current_value;
 				});
 				companies.crunchbaseInfo(companyIdentifier, function(companyInfo) {
-					//$('<h1 id="company_name">'+companyInfo.name+'</h1>').appendTo('#info');
 					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+crunchbaseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="'+companyInfo.name+'" /></a>').appendTo('#info');
 					if(stockValue){
-						$('<p><strong>Value:</strong> <span id="company_value">'+stockValue+'$</span></p>').appendTo('#info');
+						console.log(companyInfo.name);
+						if(companyInfo.name == '<Undefined>'){
+							var theCompanyName = '&lt;Undefined&gt;';
+						}else{
+							var theCompanyName = companyInfo.name;
+						}
+						
+						$('<div id="stock_value"><h1 id="company_name">'+theCompanyName+'</h1><p><strong>Value</strong> <span id="company_value">$'+stockValue+'</span></p><div class="clear"><!-- // --></div></div>').appendTo('#info');
 					}
+					$('<div class="clear"><!-- // --></div>').appendTo('#info');
 					if(companyInfo.twitter_username){
 						$('<p><strong>Twitter:</strong> <a href="http://twitter.com/#!/'+companyInfo.twitter_username+'" id="company_twitter" target="_blank">'+companyInfo.twitter_username+'</a></p>').appendTo('#info');
 					}
 					
-					$('<p><strong>Description:</strong> <span id="company_description">'+companyInfo.overview+'</span></p>').appendTo('#info');
+					$('<p><span id="company_description">'+companyInfo.overview+'</span></p>').appendTo('#info');
 					$('#company_description a').each(function(){
 						var $t = jQuery(this);
 						    $t.after($t.text());
@@ -88,14 +93,15 @@
 		</div>
 		<div id="root">
 			<div id="content" class="clearfix">
-				<div class="clearfix">
+				<div id="info_and_chart">
 					<div id="info"></div>
 					<div id="company_chart"></div>
 				</div>
 				<div id="investing">
-					<h2>Investing</h2>
+					<h2>My Stock Options</h2>
 					<form>
-						<p><input type="text" class="text" name="num_shares" size="3" value="" /> shares &nbsp;<button>Buy</button></p>
+						<input type="text" class="buy_input text clearable" name="num_shares" size="3" value="1" title="1" />
+						<button class="buy_button"></button>
 					</form>
 				</div>
 			</div>
