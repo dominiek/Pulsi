@@ -73,5 +73,9 @@ h1, h2 {
 	float: left;
 }
 
-
-
+.company-block {
+	float: left; 
+	clear: none; 
+	height: 100px; 
+	margin: 0 15px;
+}

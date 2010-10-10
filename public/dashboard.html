@@ -13,7 +13,7 @@
 						var companyName = this.name;
 						companies.crunchbaseInfo(companyId, function(companyInfo) {
 							var companyLogo = crunchbaseUrl+companyInfo.image.available_sizes[0][1];
-							$('<p><a href="/company.html#/'+companyId+'" id="company_url" target="_blank"><img src="'+companyLogo+'" alt="'+companyName+'" /></a></p>').appendTo('#companies');
+							$('<div class="company-block"><a href="/company.html#/'+companyId+'" target="_blank"><img src="'+companyLogo+'" alt="'+companyName+'" /></a></div>').appendTo('#companies');
 						});
 					})
 				});
@@ -29,7 +29,6 @@
 			</div>
 			<div id="content" class="clearfix">
 				<h1>Dashboard</h1>
-				<p>We'll have a list of companies here</p>
 				<div id="companies"></div>
 			</div>
 		</div>
