@@ -22,7 +22,7 @@ Users.prototype.buy = function(company_identifier, num_shares, callback) { var s
       if(response.error) {
         alert("Error: "+response.error);
       } else {
-        callback();
+        callback(response.user);
       }
     }, 'json');
   });
