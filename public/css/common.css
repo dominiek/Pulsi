@@ -41,7 +41,9 @@ html[xmlns] .clearfix {
 strong {font-weight: bold;}
 
 h1, h2 {
-	font-size: 22px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #a3a3a3;
 	margin-bottom: 20px;
 }
 
@@ -107,7 +109,7 @@ button {
 
 /* content */
 #content {
-	padding: 37px 0 0 63px;
+	padding: 37px 0 37px 63px;
 }
 
 #content p, #content img, #content form {
@@ -219,8 +221,12 @@ button {
 .company-block {
 	float: left; 
 	clear: none; 
-	height: 100px; 
-	margin: 0 15px;
+	height: 70px; 
+	margin: 30px 15px 0;
+}
+
+.company-block img {
+	margin-bottom: 0;
 }
 
 /* footer */
