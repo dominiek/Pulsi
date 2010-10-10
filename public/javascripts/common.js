@@ -30,7 +30,7 @@ function userInfo(){
 	var usrName = localStorage.getItem('username');
 	$.getJSON('/signin.json?username='+usrName, function(response) {
 		$('#head_username').html(response.user.username);
-		$('#balance').html(response.user.balance);
+		$('#balance').html('$'+response.user.balance);
 	});
 }
 
