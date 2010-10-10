@@ -47,8 +47,9 @@
   						});
 					});
 					$('#investing form').submit(function() {
-						  users.buy(companyIdentifier, parseInt($('#investing input.text').val()), function() {
+						  users.buy(companyIdentifier, parseInt($('#investing input.text').val()), function(user) {
 						    $('#investing input.text').val('');
+						    $('#balance').html('$'+user.balance);
 						  });
 						  return false;
 						});
@@ -119,7 +120,7 @@
 			</div>
 			<div id="footer">
 				<h3>Pulsi</h3>
-				<p><a href="#" title="Copyright &amp; shit" onclick="alert('http://github.com/dominiek/Pulsi');return false;">Copyright &amp; shit</a></p>
+				<p><a href="http://github.com/dominiek/Pulsi" title="">Fork the code</a></p>
 				<div class="clear"><!-- // --></div>
 			</div>
 		</div>

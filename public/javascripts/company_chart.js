@@ -28,7 +28,7 @@ function graphCompany(company){
 		},
 		tooltip: {
 			formatter: function() {
-				return 'Stock Value = $'+ Highcharts.numberFormat(this.y, 2);
+				return 'Share Price: $'+ Highcharts.numberFormat(this.y, 2);
 			}
 		},
 		legend: {
