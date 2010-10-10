@@ -42,6 +42,7 @@
 					if(companyInfo.twitter_username){
 						$('<p><strong>Twitter:</strong> <a href="http://twitter.com/#!/'+companyInfo.twitter_username+'" id="company_twitter" target="_blank">'+companyInfo.twitter_username+'</a></p>').appendTo('#info');
 					}
+					
 					$('<p><strong>Description:</strong> <span id="company_description">'+companyInfo.overview+'</span></p>').appendTo('#info');
 					$('#company_description a').each(function(){
 						var $t = jQuery(this);

@@ -70,3 +70,6 @@ function graphCompany(company){
 		}]
 	});
 }
+function updateChart(point){
+	companyChart.series[0].addPoint(point)
+}
