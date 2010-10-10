@@ -19,8 +19,9 @@
 						var investments = response.user.investments;
 						var companyIdentifiers = _.keys(investments);
 						for(var k=0; companyIdentifiers.length>k; k++) {
-						  var investment = investments[companyIdentifiers[k]];
-							console.log(investment);
+						  	var investment = investments[companyIdentifiers[k]];
+							//console.log(investment.num_shares);
+							//var companyId = investment.identifier;
 						}
 						$('<p>Hello '+usrName+'!</p>').appendTo('#dashboard');
 						
