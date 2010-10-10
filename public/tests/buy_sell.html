@@ -14,12 +14,7 @@
 	      
         asyncTest("Websocket Connection", function() {
           
-          socket = new io.Socket('localhost');
-          socket.connect();
-          socket.send($.toJSON({action: 'initialize', username: 'dominiek'}));
-          socket.send($.toJSON({action: 'subscribe', company_identifier: 'techcrunch'}));
-          socket.on('message', function(response){
-            response = $.evalJSON(response);
+          companies.subscribe('dominiek', 'techcrunch', function(response) {
             equal("activity", response.action, "Expected action to be activity")
             start();
           });

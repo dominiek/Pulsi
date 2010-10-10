@@ -100,7 +100,7 @@ app.get('/buy.json', function(req, res) {
       for(var k=0; activeUsernames.length>k; k++) {
         var client = ACTIVE_CLIENTS[activeUsernames[k]];
         if(client.company_identifier && client.company_identifier == req.param('company_identifier')) {
-          client.send(JSON.stringify({action: 'activity', 'activity': {value: company.current_value}}));
+          client.send(JSON.stringify({action: 'activity', 'activityObject': {value: company.current_value}}));
         }
       }
       
