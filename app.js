@@ -95,6 +95,15 @@ app.get('/buy.json', function(req, res) {
       if(costs > user.balance) {
         return respondWithCallback(req, res, {error: "Not enough balance! Sorry!"});
       }
+      
+      var activeUsernames = Object.keys(ACTIVE_CLIENTS);
+      for(var k=0; activeUsernames.length>k; k++) {
+        var client = ACTIVE_CLIENTS[activeUsernames[k]];
+        if(client.company_identifier && client.company_identifier == req.param('company_identifier')) {
+          client.send(JSON.stringify({action: 'activity', 'activity': {value: company.current_value}}));
+        }
+      }
+      
       return respondWithCallback(req, res, {ok: "Shares purchased."}); 
     });
   });

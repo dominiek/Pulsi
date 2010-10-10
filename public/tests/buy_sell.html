@@ -18,9 +18,9 @@
           socket.connect();
           socket.send($.toJSON({action: 'initialize', username: 'dominiek'}));
           socket.send($.toJSON({action: 'subscribe', company_identifier: 'techcrunch'}));
-          socket.on('message', function(data){
-            alert("Mesage received: "+data);
-            equal(1, 1, "placeholder")
+          socket.on('message', function(response){
+            response = $.evalJSON(response);
+            equal("activity", response.action, "Expected action to be activity")
             start();
           });
           

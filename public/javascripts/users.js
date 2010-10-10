@@ -16,7 +16,7 @@ Users.prototype.fetch = function(username, callback) {
   }, 'json')
 };
 
-Users.buy = function(company_identifier, num_shares) { var self = this;
+Users.prototype.buy = function(company_identifier, num_shares) { var self = this;
   self.current(function(user) {
     $.get('/buy.json?username='+user.username+'&company_identifier='+company_identifier+'&num_shares='+num_shares, function(response) {
       if(response.error) {
