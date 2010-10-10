@@ -22,7 +22,7 @@ function graphCompany(company){
 			title: {
 				text: ''
 			},
-			min: 50,
+			min: 0,
 			startOnTick: false,
 			showFirstLabel: false
 		},
