@@ -2,10 +2,13 @@ $(document).ready(function(){
 	
 	if(window.location.pathname != '/login.html' && !localStorage.getItem('username')){
 		location.href = 'login.html';
+	}else if(localStorage.getItem('username')){
+		$('<p class="welcome">Hello, <span id="head_username">username</span>. You\'ve got <span id="balance">$400,000</span> on your account</p>').appendTo('#userinfo');
+		userInfo();
 	}
 	
 	if (window.webkitNotifications && window.webkitNotifications.checkPermission() != 0) {
-		$('<a href="#" onclick="setupNotification(); return false;">Allow notifications</a>').prependTo('#userinfo');
+		$('<a href="#" onclick="setupNotification(); return false;" class="allow_link">Enable notifications!</a>').appendTo('#userinfo');
 	}
 	
 	if($('input.clearable').length > 0){
@@ -22,6 +25,14 @@ $(document).ready(function(){
 	}
 	
 });
+
+function userInfo(){
+	var usrName = localStorage.getItem('username');
+	$.getJSON('/signin.json?username='+usrName, function(response) {
+		$('#head_username').html(response.user.username);
+		$('#balance').html('$'+response.user.balance);
+	});
+}
 
 function setupNotification(){
 	window.webkitNotifications.requestPermission();

@@ -58,14 +58,13 @@
 				companies.crunchbaseInfo(companyIdentifier, function(companyInfo) {
 					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+crunchbaseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="'+companyInfo.name+'" /></a>').appendTo('#info');
 					if(stockValue){
-						console.log(companyInfo.name);
 						if(companyInfo.name == '<Undefined>'){
 							var theCompanyName = '&lt;Undefined&gt;';
 						}else{
 							var theCompanyName = companyInfo.name;
 						}
 						
-						$('<div id="stock_value"><h1 id="company_name">'+theCompanyName+'</h1><p><strong>Share price: </strong> <span id="company_value">$'+roundSharePrice(stockValue)+'</span></p><div class="clear"><!-- // --></div></div>').appendTo('#info');
+						$('<div id="stock_value"><h1 id="company_name">'+theCompanyName+'</h1><p><span id="company_value">$'+roundSharePrice(stockValue)+'</span></p><div class="clear"><!-- // --></div></div>').appendTo('#info');
 					}
 					$('<div class="clear"><!-- // --></div>').appendTo('#info');
 					if(companyInfo.twitter_username){
