@@ -1,6 +1,7 @@
 body, html {
 	font-family: Arial;
 	background: #e8e8e8 url(/images/head_gr.png) repeat-x 0 0;
+	font-size: 12px;
 }
 
 #root {
@@ -106,15 +107,31 @@ button {
 
 /* content */
 #content {
-	padding: 20px;
+	padding: 37px 0 0 63px;
 }
 
 #content p, #content img, #content form {
 	margin-bottom: 20px;
 }
 
+#content p {
+	color: #7d7d7d;
+}
+
+#content p a {
+	color: #5bcadb;
+}
+
+/* info_and_chart */
+#info_and_chart {
+	width: 705px;
+	float: left;
+	clear: none;
+	border-right: 1px solid #e5e5e5;
+}
+
 #info {
-	width: 470px; 
+	width: 235px; 
 	float: left;
 }
 
@@ -122,6 +139,81 @@ button {
 	width: 470px; 
 	height: 400px;
 	float: left;
+}
+
+#investing {
+	padding: 0 0 0 28px;
+	width: 160px;
+	float: left;
+	clear: none;
+}
+
+#investing h2 {
+	font-size: 18px;
+	font-weight: bold;
+	color: #a3a3a3;
+}
+
+#investing .buy_input,
+#investing .sell_input {
+	background-image: url(/images/buy_input.png);
+	width: 130px;
+	padding: 0 15px;
+	height: 43px;
+	border-width: 0;
+	text-align: right;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#investing .sell_input {
+	background-image: url(/images/sell_input.png);
+}
+
+#investing .buy_button,
+#investing .sell_button {
+	background-image: url(/images/buy_button.png);
+	width: 160px;
+	height: 41px;
+	border-width: 0;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+#investing .sell_button {
+	background-image: url(/images/sell_button.png);
+}
+
+#stock_value {
+	margin-bottom: 20px;
+	float: left;
+	background-color: #e9e9e9;
+	border: 1px solid #d9d9d9;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#stock_value h1 {
+	float: left;
+	color: #8a8a8a;
+	font-size: 18px;
+	margin: 0;
+	padding: 10px 12px;
+	border-right: 1px solid #d9d9d9;
+}
+
+#stock_value p {
+	float: left;
+	color: #8a8a8a;
+	font-size: 14px;
+	margin: 0;
+	padding: 10px 12px;
+}
+
+#stock_value p span {
+	color: #86a723;
+	font-size: 18px;
 }
 
 .company-block {
