@@ -6,6 +6,7 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="javascripts/sammy-0.6.1.min.js"></script>
 		<script type="text/javascript" src="javascripts/highcharts.js"></script>
+		<script type="text/javascript" src="javascripts/jquery.truncatable.js"></script>
 		<script type="text/javascript" src="javascripts/companies.js"></script>
 		<script type="text/javascript" src="javascripts/company_chart.js"></script>
 		<script type="text/javascript">
@@ -18,7 +19,7 @@
 						companyName = this.params['name'];
 						longCompanyDetails();
 						companies.info(companyName, function(company) {
-  						graphCompany(company);
+	  						graphCompany(company);
 						});
 					});
 				});
@@ -27,17 +28,26 @@
 			
 			function longCompanyDetails(){
 				$('#info').html('');
+				var stockValue;
+				companies.info(companyName, function(companyInfo) {
+					stockValue = companyInfo.current_value;
+				});
 				companies.crunchbaseInfo(companyName, function(companyInfo) {
-					$('<h1 id="company_name">'+companyInfo.name+'</h1>').appendTo('#info');
+					//$('<h1 id="company_name">'+companyInfo.name+'</h1>').appendTo('#info');
 					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+crunchbaseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="'+companyInfo.name+'" /></a>').appendTo('#info');
-					$('<p><strong>Value:</strong> <span id="company_value"></span></p>').appendTo('#info');
+					if(stockValue){
+						$('<p><strong>Value:</strong> <span id="company_value">'+stockValue+'</span></p>').appendTo('#info');
+					}
 					if(companyInfo.twitter_username){
 						$('<p><strong>Twitter:</strong> <a href="http://twitter.com/#!/'+companyInfo.twitter_username+'" id="company_twitter" target="_blank">'+companyInfo.twitter_username+'</a></p>').appendTo('#info');
 					}
-					$('<p><strong>Description:</strong> <span id="company_description">'+companyInfo.overview+'</span></p>').appendTo('#info');					
-				});
-				companies.info(companyName, function(companyInfo) {
-					$('#company_value').html(companyInfo.current_value);
+					$('<p><strong>Description:</strong> <span id="company_description">'+companyInfo.overview+'</span></p>').appendTo('#info');
+					$('#company_description a').each(function(){
+						var $t = jQuery(this);
+						    $t.after($t.text());
+						    $t.remove();
+					});
+					$('#company_description').truncatable({	limit: 500, more: 'read more', less: true, hideText: 'hide' });
 				});
 			}
 			
@@ -52,16 +62,16 @@
 			</div>
 			<div id="content" class="clearfix">
 				<div class="clearfix">
-					<div id="stock">
-						<h2>My stock options</h2>
-						<form>
-							<p><input type="text" name="buy_stock_count" size="3" value="100" /><button>Buy Stock &rarr;</button></p>
-							<p><input type="text" name="sell_stock_count" size="3" value="100" /><button>Sell Stock &rarr;</button></p>
-						</form>
-					</div>
+					<div id="info"></div>
 					<div id="company_chart"></div>
 				</div>
-				<div id="info"></div>
+				<div id="stock">
+					<h2>My stock options</h2>
+					<form>
+						<p><input type="text" name="buy_stock_count" size="3" value="100" /><button>Buy Stock &rarr;</button></p>
+						<p><input type="text" name="sell_stock_count" size="3" value="100" /><button>Sell Stock &rarr;</button></p>
+					</form>
+				</div>
 			</div>
 		</div>
 	</body>

@@ -62,13 +62,13 @@ h1, h2 {
 	margin-bottom: 20px;
 }
 
-#stock {
-	width: 200px; 
+#info {
+	width: 470px; 
 	float: left;
 }
 
 #company_chart {
-	width: 740px; 
+	width: 470px; 
 	height: 400px;
 	float: left;
 }
