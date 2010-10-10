@@ -9,16 +9,14 @@
 		<script type="text/javascript" src="javascripts/companies.js"></script>
 		<script type="text/javascript" src="javascripts/company_chart.js"></script>
 		<script type="text/javascript">
-			var baseUrl = 'http://api.crunchbase.com/';
 			var companyName;
-			var companyChart;
 			
 			$(document).ready(function(){
 				
 				var sammy = $.sammy(function() {
 					this.get('#/:name', function() {
 						companyName = this.params['name'];
-						showCompanyDetails();
+						longCompanyDetails();
 						companies.info(companyName, function(company) {
   						graphCompany(company);
 						});
@@ -27,11 +25,11 @@
 				sammy.run();
 			});
 			
-			function showCompanyDetails(){
+			function longCompanyDetails(){
 				$('#info').html('');
 				companies.crunchbaseInfo(companyName, function(companyInfo) {
 					$('<h1 id="company_name">'+companyInfo.name+'</h1>').appendTo('#info');
-					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+baseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="logo" /></a>').appendTo('#info');
+					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+crunchbaseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="'+companyInfo.name+'" /></a>').appendTo('#info');
 					$('<p><strong>Value:</strong> <span id="company_value"></span></p>').appendTo('#info');
 					if(companyInfo.twitter_username){
 						$('<p><strong>Twitter:</strong> <a href="http://twitter.com/#!/'+companyInfo.twitter_username+'" id="company_twitter" target="_blank">'+companyInfo.twitter_username+'</a></p>').appendTo('#info');

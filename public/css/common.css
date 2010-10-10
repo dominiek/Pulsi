@@ -5,7 +5,7 @@ body, html {
 
 #root {
 	width: 980px;
-	margin: 0 auto;
+	margin: 15px auto 0;
 	background-color: #fff;
 }
 
