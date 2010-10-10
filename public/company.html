@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="javascripts/jquery.truncatable.js"></script>
 		<script type="text/javascript" src="javascripts/companies.js"></script>
 		<script type="text/javascript" src="javascripts/company_chart.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
 		<script type="text/javascript">
 			var companyName;
 			
@@ -58,6 +59,10 @@
 	<body>
 		<div id="root">
 			<div id="head">
+				<p id="userinfo">
+					<a href="dashboard.html">Dashboard</a>
+					<a href="#" onclick="userLogout(); return false;">Logout</a>
+				</p>
 				<div id="logo">Pul&#36;i</div>
 			</div>
 			<div id="content" class="clearfix">

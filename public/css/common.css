@@ -52,6 +52,15 @@ h1, h2 {
 	text-transform: uppercase;
 }
 
+#userinfo {
+	margin-top: 10px;
+	float: right;
+}
+#userinfo a {
+	margin-left: 10px;
+	color: #fff;
+}
+
 
 /* content */
 #content {

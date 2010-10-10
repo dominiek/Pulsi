@@ -3,7 +3,6 @@ function graphCompany(company){
   var data = [];
   var numActivities = 40;
   var relevantActivity = company.activity.slice(0-numActivities);
-console.log(company.activity.slice(0-numActivities));
   for(var i=0; relevantActivity.length>i; i++) {
     data.push(relevantActivity[i].value);
   }

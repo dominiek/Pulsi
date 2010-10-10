@@ -5,6 +5,8 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="javascripts/companies.js"></script>
+		<script type="text/javascript" src="javascripts/users.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				companies.browse(function(companiesInfo) {
@@ -13,7 +15,7 @@
 						var companyName = this.name;
 						companies.crunchbaseInfo(companyId, function(companyInfo) {
 							var companyLogo = crunchbaseUrl+companyInfo.image.available_sizes[0][1];
-							$('<div class="company-block"><a href="/company.html#/'+companyId+'" target="_blank"><img src="'+companyLogo+'" alt="'+companyName+'" /></a></div>').appendTo('#companies');
+							$('<div class="company-block"><a href="/company.html#/'+companyId+'"><img src="'+companyLogo+'" alt="'+companyName+'" /></a></div>').appendTo('#companies');
 						});
 					})
 				});
@@ -25,6 +27,9 @@
 	<body>
 		<div id="root">
 			<div id="head">
+				<p id="userinfo">
+					<a href="#" onclick="userLogout(); return false;">Logout</a>
+				</p>
 				<div id="logo">Pul&#36;i</div>
 			</div>
 			<div id="content" class="clearfix">
