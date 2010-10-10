@@ -30,21 +30,16 @@ var respondWithCallback = function (req, res, object) {
 };
 
 app.get('/companies.json', function(req, res){
-  var companies = [
-    {name: "Dropbox", identifier: "dropbox"},
-    {name: "Facebook", identifier: "facebook"},
-    {name: "Twitter", identifier: "twitter"},
-    {name: "Techcrunch", identifier: "techcrunch"},
-    {name: "Mashable", identifier: "mashable"},
-    {name: "Evernote", identifier: "evernote"},
-    {name: "Github", identifier: "github"},
-    {name: "Last.fm", identifier: "last-fm"},
-    {name: "LinkedIn", identifier: "linkedin"},
-    {name: "Youtube", identifier: "youtube"},
-    {name: "37Signals", identifier: "37signals"},
-    {name: "Skype", identifier: "skype"},
-  ];
-  respondWithCallback(req, res, {companies: companies});
+  var companies = [];
+  db.load(function(storage) {
+    companyIdentfiers = Object.keys(storage.companies);
+    for(var k=0; companyIdentfiers.length>k; k++) {
+      var company = storage.companies[companyIdentfiers[k]];
+      var lcompany = {identifier: companyIdentfiers[k], name: company.name, current_value: company.current_value};
+      companies.push(lcompany);
+    }
+    respondWithCallback(req, res, {companies: companies});
+  });
 });
 
 app.get('/companies/:identifier.json', function(req, res) {
@@ -54,25 +49,29 @@ app.get('/companies/:identifier.json', function(req, res) {
   });
 });
 
-app.post('/signin', function(req, res) {
+app.get('/signin.json', function(req, res) {
   if(!req.param('username')) {
     return respondWithCallback(req, res, {error: "Need :username"}); 
   }
   db.load(function(storage) {
     var user = storage.users[req.param('username')];
     if(user) {
-      return respondWithCallback(req, res, {user: user}); 
+      return respondWithCallback(req, res, {user: user, is_new: false}); 
     } else {
-      user = db.newUser();
+      user = db.newUser(req.param('username'));
       storage.users[req.param('username')] = user;
       db.store(function() {
-        respondWithCallback(req, res, {user: user}); 
+        respondWithCallback(req, res, {user: user, is_new: true}); 
       });
     }
   });
 });
 
-app.post('/buy', function(req, res) {
+app.get('/buy.json', function(req, res) {
+  if(!req.param('username')) {
+    return respondWithCallback(req, res, {error: "Need :username"}); 
+  }
+  
   if(!req.param('company_identifier')) {
     return respondWithCallback(req, res, {error: "Need :company_identifier"}); 
   }
@@ -80,6 +79,23 @@ app.post('/buy', function(req, res) {
   if(!req.param('num_shares')) {
     return respondWithCallback(req, res, {error: "Need :num_shares"}); 
   }
+  
+  db.fetchUser(req.param('username'), function(user) {
+    db.fetchCompany(req.param('company_identifier'), function(company) {
+      var num_shares = parseInt(req.param('num_shares'));
+      var costs = Math.round(num_shares * parseInt(company.current_value));
+      if(costs > user.balance) {
+        return respondWithCallback(req, res, {error: "Not enough balance! Sorry!"});
+      }
+    });
+  });
+  
+});
+
+db.load(function() {
+  db.store(function() {
+    sys.puts("Database initialized")
+  });
 });
 
 sys.puts("Running on http://localhost:6008/");
