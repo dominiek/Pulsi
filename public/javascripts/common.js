@@ -27,9 +27,15 @@ function setupNotification(){
 	window.webkitNotifications.requestPermission();
 }
 
-function showChromeNotification(notificationText) {
+function showChromeNotification(notificationTitle, notificationText) {
 	if (window.webkitNotifications && window.webkitNotifications.checkPermission() == 0) {
-		window.webkitNotifications.createNotification('', 'Plain Text Notification', notificationText).show(); 
+	  var notification = window.webkitNotifications.createNotification('', notificationTitle, notificationText);
+	  notification.show();
+	  setTimeout(function () {
+	    if(notification) {
+        notification.cancel();
+	    }
+    }, 5000); 
 	}  
 }
 

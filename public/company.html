@@ -24,16 +24,16 @@
 						companyIdentifier = this.params['identifier'];
 						longCompanyDetails();
 						companies.info(companyIdentifier, function(company) {
-	  						graphCompany(company);
-							showChromeNotification('test notification');
+  						graphCompany(company);
+  						users.current(function(user) {
+  						  companies.subscribe(user.username, companyIdentifier, function(response) {
+  						    company.current_value = response.activityObject.value;
+    							showChromeNotification(company.name, 'Share price is now: '+company.current_value+'$');
+  						    updateChart(company.current_value);
+  					    });
+  						});
 						});
-						users.current(function(user) {
-						  companies.subscribe(user.username, companyIdentifier, function(response) {
-						    alert("New stock value: "+response.activityObject.value);
-						    //updateChart(point)
-						    //webkit notifications
-					    });
-						});
+
 						
 						$('#investing form').submit(function() {
 						  users.buy(companyIdentifier, parseInt($('#investing input.text').val()), function() {
