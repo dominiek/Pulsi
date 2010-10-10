@@ -1,0 +1,3 @@
+[submodule "lib/support/socketio"]
+	path = lib/support/socketio
+	url = git://github.com/LearnBoost/Socket.IO-node.git

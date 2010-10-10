@@ -1,4 +1,5 @@
 
+//require.paths.unshift(__dirname + '/lib/support/socketio/lib')
 require.paths.unshift(__dirname + '/lib')
 sys = require('sys')
 var express = require('express'),
@@ -6,8 +7,8 @@ var express = require('express'),
     auth    = require('connect-auth');
 var db = require('db');
 var activity = require('activity');
-    
-    
+var io = require('./lib/support/socketio/lib/socket.io');    
+
 var MemoryStore = require('connect/middleware/session/memory');
 
 var app = express.createServer(
@@ -19,6 +20,8 @@ var app = express.createServer(
   connect.cookieDecoder(),
   connect.session({ store: new MemoryStore({ reapInterval: 60000 * 10 }) })
 );
+
+var ACTIVE_CLIENTS = {};
     
 var respondWithCallback = function (req, res, object) {
   callback = req.param('callback') || req.param('cb')
@@ -28,6 +31,10 @@ var respondWithCallback = function (req, res, object) {
     res.send(JSON.stringify(object), { 'Content-Type': 'text/plain' }, 200)
   }
 };
+
+app.get('/', function(req, res){
+  res.redirect('/dashboard.html')
+});
 
 app.get('/companies.json', function(req, res){
   var companies = [];
@@ -100,3 +107,24 @@ db.load(function() {
 
 sys.puts("Running on http://localhost:6008/");
 app.listen(6008);
+
+var socket = io.listen(app); 
+socket.on('connection', function(client){
+  client.username = null;
+  
+  client.on('message', function(message){
+    var command = JSON.parse(message);
+    sys.puts("Received command: "+sys.inspect(command))
+    
+    if(command.action == 'initialize') {
+      ACTIVE_CLIENTS[command.username] = client;
+      client.username = command.username;
+      sys.puts("Connectees: "+sys.inspect(Object.keys(ACTIVE_CLIENTS)))
+    }
+  }) 
+  client.on('disconnect', function(){
+    ACTIVE_CLIENTS[client.username] = null;
+    delete ACTIVE_CLIENTS[client.username];
+    sys.puts("Connectees: "+sys.inspect(Object.keys(ACTIVE_CLIENTS)))
+  }) 
+});
