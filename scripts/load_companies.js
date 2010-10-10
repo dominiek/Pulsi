@@ -31,9 +31,10 @@ var determineShares = function(storage) {
   var companyIdentifier = Object.keys(storage.companies);
   for(var k=0; companyIdentifier.length>k; k++) {
     var identifier = companyIdentifier[k];
-    storage.companies[identifier].start_value = 70;
-    storage.companies[identifier].current_value = 70;
-    storage.companies[identifier].total_shares = 14000000;
+    storage.companies[identifier].total_investments = 6000000;
+    storage.companies[identifier].total_shares = 88000;
+    storage.companies[identifier].start_value = Math.round(storage.companies[identifier].total_investments/storage.companies[identifier].total_shares);
+    storage.companies[identifier].current_value = storage.companies[identifier].start_value;
   }
 };
 

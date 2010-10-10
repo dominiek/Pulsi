@@ -52,7 +52,9 @@ app.get('/companies.json', function(req, res){
 app.get('/companies/:identifier.json', function(req, res) {
   db.fetchCompany(req.param('identifier'), function(company) {
     activity.synthesize(company);
-    return respondWithCallback(req, res, {company: company});
+    db.updateSharePriceFor(req.param('identifier'), company.activity[company.activity.length-1].value, function() {
+      return respondWithCallback(req, res, {company: company});
+    })
   });
 });
 
@@ -96,6 +98,7 @@ app.get('/buy.json', function(req, res) {
         return respondWithCallback(req, res, {error: "Not enough balance! Sorry!"});
       }
       
+      sys.puts("Diluting "+company.name+" based on current share price: $"+company.current_value)
       var activityObject = {what: "dilution", when: new Date()};
       activityObject.timestamp = activityObject.when-0;
       activityObject.raw_value = num_shares;

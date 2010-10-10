@@ -13,7 +13,7 @@ function graphCompany(company){
 			zoomType: 'x'
 		},
 	        title: {
-			text: 'Stock Value'
+			text: 'Share Price'
 		},
 	        subtitle: {
 			text: 'Click and drag in the plot area to zoom in'
