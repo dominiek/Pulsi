@@ -27,6 +27,12 @@ function setupNotification(){
 	window.webkitNotifications.requestPermission();
 }
 
+function showChromeNotification(notificationText) {
+	if (window.webkitNotifications && window.webkitNotifications.checkPermission() == 0) {
+		window.webkitNotifications.createNotification('', 'Plain Text Notification', notificationText).show(); 
+	}  
+}
+
 function userLogin(){
 	var usrName = $('#username').get(0).value;
 	$.getJSON('/signin.json?username='+usrName, function(response) {

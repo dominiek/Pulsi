@@ -25,6 +25,7 @@
 						longCompanyDetails();
 						companies.info(companyIdentifier, function(company) {
 	  						graphCompany(company);
+							showChromeNotification('test notification');
 						});
 						users.current(function(user) {
 						  companies.subscribe(user.username, companyIdentifier, function(response) {
