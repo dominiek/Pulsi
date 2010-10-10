@@ -63,7 +63,7 @@ app.get('/signin.json', function(req, res) {
   db.load(function(storage) {
     var user = storage.users[req.param('username')];
     if(user) {
-      user.investments = {'techcrunch': {num_shares: 30}, 'dropbox': {num_shares: 18}}
+      user.investments = {'techcrunch': {num_shares: 30, identifier: 'techcrunch'}, 'dropbox': {num_shares: 18, identifier: 'dropbox'}}
       return respondWithCallback(req, res, {user: user, is_new: false}); 
     } else {
       user = db.newUser(req.param('username'));
