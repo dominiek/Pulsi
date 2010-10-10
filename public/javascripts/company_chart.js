@@ -23,7 +23,7 @@ console.log(company.activity.slice(0-numActivities));
 			title: {
 				text: ''
 			},
-			min: 2280,
+			min: 0,
 			startOnTick: false,
 			showFirstLabel: false
 		},
