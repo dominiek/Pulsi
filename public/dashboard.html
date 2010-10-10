@@ -10,6 +10,24 @@
 		<script type="text/javascript" src="javascripts/common.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				
+				var usrName = localStorage.getItem('username');
+				
+				// dashboard
+				if(localStorage.getItem('username')){
+					$.getJSON('/signin.json?username='+usrName, function(response) {
+						var investments = response.user.investments;
+						$(investments).each(function(count, e){
+							console.log(e);
+						})
+						$('<p>Hello '+usrName+'!</p>').appendTo('#dashboard');
+						
+					});
+				}
+				
+				
+				
+				// browse companies
 				companies.browse(function(companiesInfo) {
 					$(companiesInfo).each(function(){
 						var companyId = this.identifier;
@@ -20,6 +38,7 @@
 						});
 					})
 				});
+				
 			});
 		</script>
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
@@ -35,6 +54,8 @@
 			</div>
 			<div id="content" class="clearfix">
 				<h1>Dashboard</h1>
+				<div id="dashboard"></div>
+				<h1>Browse</h1>
 				<div id="companies"></div>
 			</div>
 		</div>
