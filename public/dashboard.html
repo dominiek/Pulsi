@@ -17,9 +17,11 @@
 				if(localStorage.getItem('username')){
 					$.getJSON('/signin.json?username='+usrName, function(response) {
 						var investments = response.user.investments;
-						$(investments).each(function(count, e){
-							console.log(e);
-						})
+						var companyIdentifiers = _.keys(investments);
+						for(var k=0; companyIdentifiers.length>k; k++) {
+						  var investment = investments[companyIdentifiers[k]];
+							console.log(investment);
+						}
 						$('<p>Hello '+usrName+'!</p>').appendTo('#dashboard');
 						
 					});
