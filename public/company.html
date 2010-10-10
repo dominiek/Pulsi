@@ -8,21 +8,28 @@
 		<script type="text/javascript" src="javascripts/sammy-0.6.1.min.js"></script>
 		<script type="text/javascript" src="javascripts/highcharts.js"></script>
 		<script type="text/javascript" src="javascripts/jquery.truncatable.js"></script>
+    <script type="text/javascript" src="../javascripts/jquery.json-2.2.min.js"></script>
+    <script src="http://cdn.socket.io/stable/socket.io.js"></script>
 		<script type="text/javascript" src="javascripts/companies.js"></script>
 		<script type="text/javascript" src="javascripts/company_chart.js"></script>
 		<script type="text/javascript" src="javascripts/users.js"></script>
 		<script type="text/javascript" src="javascripts/common.js"></script>
 		<script type="text/javascript">
-			var companyName;
+			var companyIdentifier;
 			
 			$(document).ready(function(){
 				
 				var sammy = $.sammy(function() {
-					this.get('#/:name', function() {
-						companyName = this.params['name'];
+					this.get('#/:identifier', function() {
+						companyIdentifier = this.params['identifier'];
 						longCompanyDetails();
-						companies.info(companyName, function(company) {
+						companies.info(companyIdentifier, function(company) {
 	  						graphCompany(company);
+						});
+						users.current(function(user) {
+						  companies.subscribe(user.username, companyIdentifier, function(response) {
+						    alert("New stock value: "+response.activityObject.value);
+					    });
 						});
 					});
 				});
@@ -32,10 +39,10 @@
 			function longCompanyDetails(){
 				$('#info').html('');
 				var stockValue;
-				companies.info(companyName, function(companyInfo) {
+				companies.info(companyIdentifier, function(companyInfo) {
 					stockValue = companyInfo.current_value;
 				});
-				companies.crunchbaseInfo(companyName, function(companyInfo) {
+				companies.crunchbaseInfo(companyIdentifier, function(companyInfo) {
 					//$('<h1 id="company_name">'+companyInfo.name+'</h1>').appendTo('#info');
 					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+crunchbaseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="'+companyInfo.name+'" /></a>').appendTo('#info');
 					if(stockValue){

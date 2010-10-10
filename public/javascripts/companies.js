@@ -32,4 +32,15 @@ Companies.prototype.crunchbaseInfo = function(identfier, callback) {
   });
 };
 
+Companies.prototype.subscribe = function(username, identfier, callback) {
+  socket = new io.Socket('localhost');
+  socket.connect();
+  socket.send($.toJSON({action: 'initialize', username: username}));
+  socket.send($.toJSON({action: 'subscribe', company_identifier: identfier}));
+  socket.on('message', function(response){
+    response = $.evalJSON(response);
+    callback(response);
+  });
+};
+
 var companies = new Companies();
