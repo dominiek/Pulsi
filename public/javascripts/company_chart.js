@@ -22,7 +22,7 @@ function graphCompany(company){
 			title: {
 				text: ''
 			},
-			min: 0,
+			min: 50,
 			startOnTick: false,
 			showFirstLabel: false
 		},
@@ -39,8 +39,8 @@ function graphCompany(company){
 				fillColor: {
 					linearGradient: [0, 0, 0, 300],
 					stops: [
-						[0, '#4572A7'],
-						[1, 'rgba(2,0,0,0)']
+						[0, '#c8e072'],
+						[1, '#9dbe2a']
 					]
 				},
 				lineWidth: 1,

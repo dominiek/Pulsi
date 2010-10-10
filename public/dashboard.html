@@ -48,18 +48,24 @@
 		<link rel="stylesheet" type="text/css" href="css/common.css">
 	</head>
 	<body>
+		<div id="head">
+			<p id="userinfo">
+				<a href="#" onclick="userLogout(); return false;" class="logout_link">Logout</a>
+			</p>
+			<div id="logo"></div>
+			<div class="clear"><!-- // --></div>
+		</div>
 		<div id="root">
-			<div id="head">
-				<p id="userinfo">
-					<a href="#" onclick="userLogout(); return false;">Logout</a>
-				</p>
-				<div id="logo">Pul&#36;i</div>
-			</div>
 			<div id="content" class="clearfix">
 				<h1>Dashboard</h1>
 				<div id="dashboard"></div>
 				<h1>Browse</h1>
 				<div id="companies"></div>
+			</div>
+			<div id="footer">
+				<h3>Pulsi</h3>
+				<p><a href="#" title="Copyright &amp; shit" onclick="alert('http://github.com/dominiek/Pulsi');return false;">Copyright &amp; shit</a></p>
+				<div class="clear"><!-- // --></div>
 			</div>
 		</div>
 	</body>

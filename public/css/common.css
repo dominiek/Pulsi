@@ -1,11 +1,11 @@
 body, html {
-	font-family: helvetica, arial;
-	background-color: #535555;
+	font-family: Arial;
+	background: #e8e8e8 url(/images/head_gr.png) repeat-x 0 0;
 }
 
 #root {
-	width: 980px;
-	margin: 15px auto 0;
+	width: 989px;
+	margin: 0 auto 100px;
 	background-color: #fff;
 }
 
@@ -31,6 +31,11 @@ html[xmlns] .clearfix {
 	height: 1%;
 }
 
+.clear {
+	display: block;
+	clear: both;
+}
+
 /* typography */
 strong {font-weight: bold;}
 
@@ -41,15 +46,48 @@ h1, h2 {
 
 /* head */
 #head {
-	padding: 20px;
-	background-color: #c23d7f;
+	width: 989px;
+	margin: 0 auto;
+	padding: 21px 0 0;
+	clear: both;
+}
+
+#head .clearfix {
+	width: 100%;
 }
 
 #logo {
-	font-size: 42px;
-	color: #4da5d6;
+	display: block; 
+	margin: 0 30px 0 63px; 
+	padding: 0; 
+	width: 182px;
+	height: 56px;
+	float: left;
+	background-image: url(/images/logo.png);
+}
+
+.logout_link {
+	width: 56px;
+	height: 0;
+	display: block; 
+	margin: 0; 
+	padding: 19px 0 0; 
+	overflow: hidden;
+	position: relative;
+	background-image: url(/images/logout.png)
+}
+
+.dashboard_link {
+	float: left;
+	color: #daf782;
 	font-weight: bold;
-	text-transform: uppercase;
+	font-size: 18px;
+	padding-top: 5px;
+}
+
+.dashboard_link a {
+	color: #2c5a06;
+	text-decoration: underline;
 }
 
 #userinfo {
@@ -87,4 +125,28 @@ h1, h2 {
 	clear: none; 
 	height: 100px; 
 	margin: 0 15px;
+}
+
+/* footer */
+#footer {
+	border-top: 1px solid #d9d9d9;
+	margin: 0 25px;
+	padding: 15px 0;
+}
+
+#footer h3 {
+	font-family: helvetica, arial;
+	font-size: 44px;
+	font-weight: bold;
+	color: #d5d5d5;
+	float: left;
+	margin-right: 15px;
+}
+
+#footer a {
+	display: block;
+	text-decoration: none;
+	color: #a8a8a8;
+	font-size: 11px;
+	margin-top: 20px;
 }
