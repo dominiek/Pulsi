@@ -1,3 +1,5 @@
+var crunchbaseUrl = 'http://api.crunchbase.com/';
+
 
 var Companies = function() {
   

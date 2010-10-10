@@ -5,7 +5,7 @@ body, html {
 
 #root {
 	width: 980px;
-	margin: 0 auto;
+	margin: 15px auto 0;
 	background-color: #fff;
 }
 
@@ -62,16 +62,20 @@ h1, h2 {
 	margin-bottom: 20px;
 }
 
-#stock {
-	width: 200px; 
+#info {
+	width: 470px; 
 	float: left;
 }
 
 #company_chart {
-	width: 740px; 
+	width: 470px; 
 	height: 400px;
 	float: left;
 }
 
-
-
+.company-block {
+	float: left; 
+	clear: none; 
+	height: 100px; 
+	margin: 0 15px;
+}
