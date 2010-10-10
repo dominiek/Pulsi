@@ -33,6 +33,7 @@ var determineShares = function(storage) {
     var identifier = companyIdentifier[k];
     storage.companies[identifier].start_value = 70;
     storage.companies[identifier].current_value = 70;
+    storage.companies[identifier].total_shares = 14000000;
   }
 };
 
