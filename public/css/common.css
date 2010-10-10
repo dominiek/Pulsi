@@ -44,6 +44,10 @@ h1, h2 {
 	margin-bottom: 20px;
 }
 
+button {
+  padding: 4px;
+}
+
 /* head */
 #head {
 	width: 989px;

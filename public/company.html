@@ -8,8 +8,8 @@
 		<script type="text/javascript" src="javascripts/sammy-0.6.1.min.js"></script>
 		<script type="text/javascript" src="javascripts/highcharts.js"></script>
 		<script type="text/javascript" src="javascripts/jquery.truncatable.js"></script>
-    <script type="text/javascript" src="../javascripts/jquery.json-2.2.min.js"></script>
-    <script src="http://cdn.socket.io/stable/socket.io.js"></script>
+	    <script type="text/javascript" src="../javascripts/jquery.json-2.2.min.js"></script>
+	    <script src="http://cdn.socket.io/stable/socket.io.js"></script>
 		<script type="text/javascript" src="javascripts/companies.js"></script>
 		<script type="text/javascript" src="javascripts/company_chart.js"></script>
 		<script type="text/javascript" src="javascripts/users.js"></script>
@@ -24,14 +24,24 @@
 						companyIdentifier = this.params['identifier'];
 						longCompanyDetails();
 						companies.info(companyIdentifier, function(company) {
-	  						graphCompany(company);
-							//showChromeNotification('test notification');
+  						graphCompany(company);
+  						users.current(function(user) {
+  						  companies.subscribe(user.username, companyIdentifier, function(response) {
+  						    company.current_value = response.activityObject.value;
+    							showChromeNotification(company.name, 'Share price is now: '+company.current_value+'$');
+  						   		updateChart(company.current_value);
+  					    	});
+  						});
+					});
+					$('#investing form').submit(function() {
+						  users.buy(companyIdentifier, parseInt($('#investing input.text').val()), function() {
+						    $('#investing input.text').val('');
+                document.location.reload();
+						  });
+						  return false;
 						});
-						users.current(function(user) {
-						  companies.subscribe(user.username, companyIdentifier, function(response) {
-						    alert("New stock value: "+response.activityObject.value);
-					    });
-						});
+    			  $('#investing input.text').focus();
+						
 					});
 				});
 				sammy.run();
@@ -47,7 +57,7 @@
 					//$('<h1 id="company_name">'+companyInfo.name+'</h1>').appendTo('#info');
 					$('<a href="'+companyInfo.homepage_url+'" id="company_url" target="_blank"><img src="'+crunchbaseUrl+companyInfo.image.available_sizes[0][1]+'" id="company_logo" alt="'+companyInfo.name+'" /></a>').appendTo('#info');
 					if(stockValue){
-						$('<p><strong>Value:</strong> <span id="company_value">'+stockValue+'</span></p>').appendTo('#info');
+						$('<p><strong>Value:</strong> <span id="company_value">'+stockValue+'$</span></p>').appendTo('#info');
 					}
 					if(companyInfo.twitter_username){
 						$('<p><strong>Twitter:</strong> <a href="http://twitter.com/#!/'+companyInfo.twitter_username+'" id="company_twitter" target="_blank">'+companyInfo.twitter_username+'</a></p>').appendTo('#info');
@@ -82,11 +92,10 @@
 					<div id="info"></div>
 					<div id="company_chart"></div>
 				</div>
-				<div id="stock">
-					<h2>My stock options</h2>
+				<div id="investing">
+					<h2>Investing</h2>
 					<form>
-						<p><input type="text" name="buy_stock_count" size="3" value="100" /><button>Buy Stock &rarr;</button></p>
-						<p><input type="text" name="sell_stock_count" size="3" value="100" /><button>Sell Stock &rarr;</button></p>
+						<p><input type="text" class="text" name="num_shares" size="3" value="" /> shares &nbsp;<button>Buy</button></p>
 					</form>
 				</div>
 			</div>
