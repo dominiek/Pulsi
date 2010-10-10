@@ -87,7 +87,6 @@ app.get('/buy.json', function(req, res) {
       if(costs > user.balance) {
         return respondWithCallback(req, res, {error: "Not enough balance! Sorry!"});
       }
-      
     });
   });
   
