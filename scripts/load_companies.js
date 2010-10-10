@@ -77,13 +77,9 @@ var fetchData = function(storage, callback) {
 db.load(function(storage) {
   storage.companies = {};
   storage.companies['techcrunch'] = {identfier: 'techcrunch', name: 'Techcrunch', domain: "techcrunch.com"};
-  storage.companies['dropbox'] = {name: "Dropbox", identifier: "dropbox", domain: "dropbox.com"};
-  storage.companies['facebook'] = {name: "Facebook", identifier: "facebook", domain: "facebook.com"};
   storage.companies['twitter'] = {name: "Twitter", identifier: "twitter", domain: "twitter.com"};
   storage.companies['mashable'] = {name: "Mashable", identifier: "mashable", domain: "mashable.com"};
   storage.companies['evernote'] = {name: "Evernote", identifier: "evernote", domain: "evernote.com"};
-  storage.companies['last-fm'] = {name: "Last.fm", identifier: "last-fm", domain: "last.fm"};
-  storage.companies['github'] = {name: "Github", identifier: "github", domain: "github.com"};
   storage.companies['linkedin'] = {name: "LinkedIn", identifier: "linkedin", domain: "linkedin.com"};
   storage.companies['youtube'] = {name: "Youtube", identifier: "youtube", domain: "youtube.com"};
   storage.companies['37signals'] = {name: "37signals", identifier: "37signals", domain: "37signals.com"};

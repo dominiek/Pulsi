@@ -65,7 +65,7 @@ app.get('/signin.json', function(req, res) {
   db.load(function(storage) {
     var user = storage.users[req.param('username')];
     if(user) {
-      user.investments = {'techcrunch': {num_shares: 30, identifier: 'techcrunch'}, 'dropbox': {num_shares: 18, identifier: 'dropbox'}}
+      //user.investments = {'techcrunch': {num_shares: 30, identifier: 'techcrunch'}, 'dropbox': {num_shares: 18, identifier: 'dropbox'}}
       return respondWithCallback(req, res, {user: user, is_new: false}); 
     } else {
       user = db.newUser(req.param('username'));
@@ -113,7 +113,13 @@ app.get('/buy.json', function(req, res) {
         }
       }
       
-      return respondWithCallback(req, res, {ok: "Shares purchased."}); 
+      
+      var newBalance = user.balance - costs;
+      var investment = {identifier: req.param('company_identifier'), num_shares: num_shares};
+      db.investFor(req.param('username'), newBalance, investment, function(user) {
+        return respondWithCallback(req, res, {ok: "Shares purchased.", user: user});
+      });
+      
     });
   });
   
