@@ -17,9 +17,11 @@
           socket = new io.Socket('localhost');
           socket.connect();
           socket.send($.toJSON({action: 'initialize', username: 'dominiek'}));
+          socket.send($.toJSON({action: 'subscribe', company_identifier: 'techcrunch'}));
           socket.on('message', function(data){
-              equal(1, 1, "placeholder")
-              start();
+            alert("Mesage received: "+data);
+            equal(1, 1, "placeholder")
+            start();
           });
           
         });

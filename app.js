@@ -63,6 +63,7 @@ app.get('/signin.json', function(req, res) {
   db.load(function(storage) {
     var user = storage.users[req.param('username')];
     if(user) {
+      user.investments = {'techcrunch': {num_shares: 30}, 'dropbox': {num_shares: 18}}
       return respondWithCallback(req, res, {user: user, is_new: false}); 
     } else {
       user = db.newUser(req.param('username'));
@@ -94,6 +95,7 @@ app.get('/buy.json', function(req, res) {
       if(costs > user.balance) {
         return respondWithCallback(req, res, {error: "Not enough balance! Sorry!"});
       }
+      return respondWithCallback(req, res, {ok: "Shares purchased."}); 
     });
   });
   
@@ -120,6 +122,9 @@ socket.on('connection', function(client){
       ACTIVE_CLIENTS[command.username] = client;
       client.username = command.username;
       sys.puts("Connectees: "+sys.inspect(Object.keys(ACTIVE_CLIENTS)))
+    }
+    if(command.action == 'subscribe') {
+      ACTIVE_CLIENTS[client.username].company_identifier = command.company_identifier;
     }
   }) 
   client.on('disconnect', function(){
